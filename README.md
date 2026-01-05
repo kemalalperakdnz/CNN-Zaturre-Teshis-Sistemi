@@ -58,6 +58,8 @@ Arayüz ekran görüntüsü ve değerlendirme çıktıları burada gösterilir.
 
 Klasör yapısı aşağıdaki gibi beklenir:
 
+https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia?resource=download
+
 ```
 chest_xray/
   train/
@@ -228,3 +230,4 @@ Bu repo için bir lisans belirlemediysen, GitHub’da yayınlamadan önce bir li
 
 - Bu proje **demo** amaçlıdır; **tıbbi tanı** yerine geçmez.
 - `val` seti çok küçükse veya “kolay” ise validation skorları aşırı yüksek görünebilir. En sağlıklı değerlendirme `test` seti ve mümkünse yeniden split ile yapılır.
+
