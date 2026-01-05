@@ -19,22 +19,6 @@ Arayüz ekran görüntüsü ve değerlendirme çıktıları burada gösterilir.
 
 ![NORMAL örneği](assets/saglikli.png)
 
-### Eğitim Grafikleri
-
-![Eğitim eğrileri](assets/training_curves.png)
-
-### Veri Dağılımı
-
-![Veri seti dağılımı](assets/dataset_distribution.png)
-
-### Confusion Matrix
-
-![Confusion Matrix](assets/confusion_matrix.png)
-
-### ROC Curve
-
-![ROC Curve](assets/roc_curve.png)
-
 ## İçindekiler
 
 - [Özellikler](#özellikler)
@@ -293,5 +277,6 @@ Bu bölümde kendi deney sonuçlarını paylaşman için alan:
 - Class imbalance için weighted loss / focal loss
 - Model açıklanabilirliği (Grad-CAM)
 - Basit bir API endpoint (JSON input/output)
+
 
 
