@@ -57,6 +57,8 @@ Arayüz ekran görüntüsü ve değerlendirme çıktıları burada gösterilir.
 
 Bu projede Kaggle üzerinde yaygın olarak kullanılan **Chest X-Ray (Pneumonia)** veri seti formatı kullanılır.
 
+https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia?resource=download
+
 ### Sınıflar
 
 - `NORMAL`: Sağlıklı göğüs röntgeni
@@ -276,6 +278,7 @@ Bu bölümde kendi deney sonuçlarını paylaşman için alan:
 - Class imbalance için weighted loss / focal loss
 - Model açıklanabilirliği (Grad-CAM)
 - Basit bir API endpoint (JSON input/output)
+
 
 
 
