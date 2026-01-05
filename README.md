@@ -19,6 +19,22 @@ Arayüz ekran görüntüsü ve değerlendirme çıktıları burada gösterilir.
 
 ![NORMAL örneği](assets/saglikli.png)
 
+### Eğitim Grafikleri
+
+![Eğitim eğrileri](assets/training_curves.png)
+
+### Veri Dağılımı
+
+![Veri seti dağılımı](assets/dataset_distribution.png)
+
+### Confusion Matrix
+
+![Confusion Matrix](assets/confusion_matrix.png)
+
+### ROC Curve
+
+![ROC Curve](assets/roc_curve.png)
+
 ## İçindekiler
 
 - [Özellikler](#özellikler)
@@ -56,9 +72,22 @@ Arayüz ekran görüntüsü ve değerlendirme çıktıları burada gösterilir.
 
 ## Veri Seti
 
-Klasör yapısı aşağıdaki gibi beklenir:
+Bu projede Kaggle üzerinde yaygın olarak kullanılan **Chest X-Ray (Pneumonia)** veri seti formatı kullanılır.
 
-https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia?resource=download
+### Sınıflar
+
+- `NORMAL`: Sağlıklı göğüs röntgeni
+- `PNEUMONIA`: Zatürre bulgusu içeren göğüs röntgeni
+
+### Split (Train/Val/Test)
+
+Model eğitimi için veri üçe ayrılır:
+
+- `train`: eğitim
+- `val`: doğrulama (erken durdurma ve en iyi model seçimi)
+- `test`: final değerlendirme
+
+Klasör yapısı aşağıdaki gibi beklenir:
 
 ```
 chest_xray/
@@ -74,6 +103,10 @@ chest_xray/
 ```
 
 Not: Veri setini repoya eklemek yerine yerelde bu yapıda konumlandırman önerilir.
+
+### Veri seti dağılımı (görsel)
+
+`assets/dataset_distribution.png` grafiği, her split içindeki sınıf örnek sayılarını gösterir.
 
 ## Kurulum
 
@@ -126,6 +159,26 @@ Tarayıcı:
 
 Varsayılan olarak `resnet18` kullanır.
 
+## Model Mimarisi
+
+### Transfer Learning (ResNet18 / EfficientNet-B0)
+
+Model omurgası **ImageNet** ile ön-eğitilmiş bir CNN’dir.
+
+- **Backbone**: `resnet18` (varsayılan) veya `efficientnet_b0`
+- **Classifier head**: Son katman, 2 sınıf için yeniden tanımlanır (`NORMAL`, `PNEUMONIA`)
+
+### Eğitim Stratejisi
+
+- **Augmentation**: `RandomResizedCrop`, `RandomAffine`, `RandomHorizontalFlip`
+- **Fine-tuning (2 aşama)**:
+  - İlk `freeze-epochs` epoch: backbone dondurulur, sadece head öğrenir
+  - Sonra backbone açılır ve daha düşük LR ile fine-tune edilir
+- **Optimizer**: `AdamW`
+- **Scheduler**: `ReduceLROnPlateau` (izlenen metrik: `val_macro_f1`)
+- **Model seçimi**: `best.pt` kaydı **validation macro-F1** en yüksek olduğunda güncellenir
+- **Early stopping**: `--patience` kadar iyileşme yoksa eğitim durur
+
 Önerilen “fine-tuning” ayarları (daha iyi genelleme için):
 
 ```powershell
@@ -136,6 +189,20 @@ Eğitim çıktıları:
 - `outputs_v2/best.pt`: validation **macro-F1**’e göre en iyi model
 - `outputs_v2/last.pt`: son epoch modeli
 - `outputs_v2/metrics.jsonl`: epoch bazlı metrikler
+
+### Eğitim grafikleri nasıl üretilir?
+
+Eğitim eğrileri (loss/accuracy/macro-F1/LR) için:
+
+```powershell
+python make_report_assets.py --run-dir outputs_v2 --data-dir chest_xray --assets-dir assets
+```
+
+Bu komut aşağıdaki görselleri üretir:
+
+- `assets/training_curves.png`
+- `assets/dataset_distribution.png`
+- (Eğer `outputs_v2` içinde varsa) `assets/confusion_matrix.png`, `assets/roc_curve.png`
 
 ## Test Değerlendirme
 
@@ -148,6 +215,18 @@ python evaluate.py --data-dir chest_xray --checkpoint outputs_v2/best.pt --out-d
 - `outputs_v2/confusion_matrix.npy`
 - `outputs_v2/y_true.npy`
 - `outputs_v2/y_prob.npy`
+
+## Başarı Metrikleri (Rapor)
+
+Bu proje aşağıdaki metrikleri raporlar:
+
+- **Accuracy**: Toplam doğruluk
+- **Precision / Recall / F1-score**: Sınıf bazlı performans
+- **Macro-F1**: Sınıfları dengeli değerlendirmek için (validation’da model seçimi)
+- **Confusion Matrix**: Hata tiplerini görselleştirir
+- **ROC-AUC**: Özellikle `PNEUMONIA` için olasılık kalitesini ölçer
+
+Bu metriklerin görsel çıktıları `assets/` altında gösterilmiştir.
 
 ### Threshold ile karar (opsiyonel)
 
@@ -230,4 +309,3 @@ Bu repo için bir lisans belirlemediysen, GitHub’da yayınlamadan önce bir li
 
 - Bu proje **demo** amaçlıdır; **tıbbi tanı** yerine geçmez.
 - `val` seti çok küçükse veya “kolay” ise validation skorları aşırı yüksek görünebilir. En sağlıklı değerlendirme `test` seti ve mümkünse yeniden split ile yapılır.
-
