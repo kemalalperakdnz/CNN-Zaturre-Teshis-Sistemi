@@ -294,18 +294,4 @@ Bu bölümde kendi deney sonuçlarını paylaşman için alan:
 - Model açıklanabilirliği (Grad-CAM)
 - Basit bir API endpoint (JSON input/output)
 
-## Sorun Giderme
 
-- **Torch kurulumu hata veriyor**
-  - CPU/GPU ortamına uygun `torch` sürümünü kurmak gerekebilir.
-- **Validation çok yüksek görünüyor**
-  - `val` seti küçük/kolay olabilir; en sağlıklı değerlendirme `test` seti ve mümkünse yeniden split ile yapılır.
-
-## Lisans
-
-Bu repo için bir lisans belirlemediysen, GitHub’da yayınlamadan önce bir lisans seçmen önerilir (örn. MIT).
-
-## Notlar
-
-- Bu proje **demo** amaçlıdır; **tıbbi tanı** yerine geçmez.
-- `val` seti çok küçükse veya “kolay” ise validation skorları aşırı yüksek görünebilir. En sağlıklı değerlendirme `test` seti ve mümkünse yeniden split ile yapılır.
