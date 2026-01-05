@@ -34,7 +34,6 @@ Arayüz ekran görüntüsü ve değerlendirme çıktıları burada gösterilir.
 - [Proje Yapısı](#proje-yapısı)
 - [Sonuçlar](#sonuçlar)
 - [Roadmap](#roadmap)
-- [Notlar](#notlar)
 
 ## Özellikler
 
@@ -277,6 +276,7 @@ Bu bölümde kendi deney sonuçlarını paylaşman için alan:
 - Class imbalance için weighted loss / focal loss
 - Model açıklanabilirliği (Grad-CAM)
 - Basit bir API endpoint (JSON input/output)
+
 
 
 
