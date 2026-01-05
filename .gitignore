@@ -1,0 +1,21 @@
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Data / artifacts
+chest_xray/
+outputs/
+outputs_v2/
+outputs_v3/
+outputs_v4/
+outputs_eff/
+uploads/
+
+# Model checkpoints
+*.pt
+*.pth
+
+# OS
+.DS_Store
+Thumbs.db
