@@ -54,7 +54,6 @@ Arayüz örnekleri ve eğitim/değerlendirme rapor çıktıları aşağıdadır.
 - [Proje Yapısı](#proje-yapısı)
 - [Sonuçlar](#sonuçlar)
 - [Roadmap](#roadmap)
-- [Notlar](#notlar)
 
 ## Özellikler
 
@@ -75,6 +74,8 @@ Arayüz örnekleri ve eğitim/değerlendirme rapor çıktıları aşağıdadır.
 - NumPy / Matplotlib (değerlendirme ve görselleştirme)
 
 ## Veri Seti
+
+https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia
 
 Bu projede Kaggle üzerinde yaygın olarak kullanılan **Chest X-Ray (Pneumonia)** veri seti formatı kullanılır.
 
@@ -297,3 +298,4 @@ Bu bölümde kendi deney sonuçlarını paylaşman için alan:
 - Class imbalance için weighted loss / focal loss
 - Model açıklanabilirliği (Grad-CAM)
 - Basit bir API endpoint (JSON input/output)
+
