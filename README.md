@@ -9,15 +9,35 @@ Bu repo:
 
 ## Görseller
 
-Arayüz ekran görüntüsü ve değerlendirme çıktıları burada gösterilir.
+Arayüz örnekleri ve eğitim/değerlendirme rapor çıktıları aşağıdadır.
 
-### Flask arayüz (PNEUMONIA örneği)
+### Flask arayüz örnekleri
+
+#### PNEUMONIA örneği
 
 ![PNEUMONIA örneği](assets/zature.png)
 
-### Flask arayüz (NORMAL örneği)
+#### NORMAL örneği
 
 ![NORMAL örneği](assets/saglikli.png)
+
+### Rapor görselleri
+
+#### Veri seti dağılımı
+
+![Veri seti dağılımı](assets/dataset_distribution.png)
+
+#### Eğitim eğrileri
+
+![Eğitim eğrileri](assets/training_curves.png)
+
+#### Confusion Matrix
+
+![Confusion Matrix](assets/confusion_matrix.png)
+
+#### ROC Curve
+
+![ROC Curve](assets/roc_curve.png)
 
 ## İçindekiler
 
@@ -34,6 +54,7 @@ Arayüz ekran görüntüsü ve değerlendirme çıktıları burada gösterilir.
 - [Proje Yapısı](#proje-yapısı)
 - [Sonuçlar](#sonuçlar)
 - [Roadmap](#roadmap)
+- [Notlar](#notlar)
 
 ## Özellikler
 
@@ -56,8 +77,6 @@ Arayüz ekran görüntüsü ve değerlendirme çıktıları burada gösterilir.
 ## Veri Seti
 
 Bu projede Kaggle üzerinde yaygın olarak kullanılan **Chest X-Ray (Pneumonia)** veri seti formatı kullanılır.
-
-https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia?resource=download
 
 ### Sınıflar
 
@@ -279,7 +298,18 @@ Bu bölümde kendi deney sonuçlarını paylaşman için alan:
 - Model açıklanabilirliği (Grad-CAM)
 - Basit bir API endpoint (JSON input/output)
 
+## Sorun Giderme
 
+- **Torch kurulumu hata veriyor**
+  - CPU/GPU ortamına uygun `torch` sürümünü kurmak gerekebilir.
+- **Validation çok yüksek görünüyor**
+  - `val` seti küçük/kolay olabilir; en sağlıklı değerlendirme `test` seti ve mümkünse yeniden split ile yapılır.
 
+## Lisans
 
+Bu repo için bir lisans belirlemediysen, GitHub’da yayınlamadan önce bir lisans seçmen önerilir (örn. MIT).
 
+## Notlar
+
+- Bu proje **demo** amaçlıdır; **tıbbi tanı** yerine geçmez.
+- `val` seti çok küçükse veya “kolay” ise validation skorları aşırı yüksek görünebilir. En sağlıklı değerlendirme `test` seti ve mümkünse yeniden split ile yapılır.
